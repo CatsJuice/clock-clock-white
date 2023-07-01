@@ -21,14 +21,14 @@ const tickTypes = computed(() => [
   {
     id: hourMaskId,
     len: config.value.hourTickLength,
-    strokeColor: isDark.value ? '#fff' : '#444',
+    strokeColor: isDark.value ? '#555' : '#444',
     strokeWidth: config.value.hourTickWidth,
     tickNum: 12,
   },
   {
     id: minuteMaskId,
     len: config.value.minuteTickLength,
-    strokeColor: isDark.value ? '#fff' : '#ccc',
+    strokeColor: isDark.value ? '#555' : '#ccc',
     strokeWidth: config.value.minuteTickWidth,
     tickNum: 60,
     skip: (i: number) => i % 5 === 0,

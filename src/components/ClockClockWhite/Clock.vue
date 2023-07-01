@@ -34,19 +34,19 @@ const variableStyles = computed(() => {
     '--h': `${props.size}px`,
     '--out-shadow-1': `20px ${outDis}px ${
       clamp(info.value.distance / props.size * 10, 30, 500)
-    }px rgba(0,0,0,.4)`,
+    }px var(--out-shadow-color-1)`,
     '--out-shadow-2': `0px ${outDis - 10}px ${
       clamp(info.value.distance / props.size * 2, 5, 100)
-    }px rgba(0,0,0, .15)`,
-    '--out-shadow-3': `0px ${outDis + 20}px 6px rgba(0,0,0,.05)`,
-    '--out-shadow-4': `0px ${outDis - 10}px 4px rgba(0,0,0,.1)`,
-    '--out-shadow-5': `10px ${outDis - 5}px 10px rgba(0,0,0,.1)`,
-    '--out-shadow-6': `-10px ${outDis - 5}px 10px rgba(0,0,0,.05)`,
-    '--out-shadow-7': `-20px ${outDis + 20}px 5px rgba(0,0,0, .06)`,
-    '--in-shadow-1': `inset 0px ${innDis}px 5px rgba(0,0,0,.25)`,
-    '--in-shadow-2': ' inset 5px 5px 6px rgba(0,0,0,0.1)',
-    '--in-shadow-3': 'inset -5px 5px 6px rgba(0,0,0,0.1)',
-    '--in-shadow-4': `inset 0px ${-innDis}px 4px rgba(255,255,255, 0.7)`,
+    }px var(--out-shadow-color-2)`,
+    '--out-shadow-3': `0px ${outDis + 20}px 6px var(--out-shadow-color-3)`,
+    '--out-shadow-4': `0px ${outDis - 10}px 4px var(--out-shadow-color-4)`,
+    '--out-shadow-5': `10px ${outDis - 5}px 10px var(--out-shadow-color-5)`,
+    '--out-shadow-6': `-10px ${outDis - 5}px 10px var(--out-shadow-color-6)`,
+    '--out-shadow-7': `-20px ${outDis + 20}px 5px var(--out-shadow-color-7)`,
+    '--in-shadow-1': `inset 0px ${innDis}px 5px var(--in-shadow-color-1)`,
+    '--in-shadow-2': ' inset 5px 5px 6px var(--in-shadow-color-2)',
+    '--in-shadow-3': 'inset -5px 5px 6px var(--in-shadow-color-3)',
+    '--in-shadow-4': `inset 0px ${-innDis}px 4px var(--in-shadow-color-4)`,
   }
 })
 
@@ -138,20 +138,33 @@ function getAngle(index: number) {
   --bw: calc(var(--w) / 20)
   --light: #fff
   --bg: #fafafa
+  --pointer-color: #000
   --pointer-width: 10px
   --pointer-speed: 400ms
-  --out-shadow-1: 20px 30px 40px rgba(0,0,0,.4)
-  --out-shadow-2:  0px 30px 5px rgba(0,0,0,.15)
-  --out-shadow-3:  0px 60px 6px rgba(0,0,0,.05)
-  --out-shadow-4: 0px 10px 4px rgba(0,0,0,.1)
-  --out-shadow-5: 10px 5px 10px rgba(0,0,0,.1)
-  --out-shadow-6: -10px 5px 10px rgba(0,0,0,.05)
-  --out-shadow-7: -20px 30px 5px rgba(0,0,0, .06)
-  --out-shadow-8: 0px -12px 12px rgba(255,255,255, 0.75)
-  --in-shadow-1: inset 0px 10px 5px rgba(0,0,0,.25)
-  --in-shadow-2:  inset 5px 5px 6px rgba(0,0,0,0.1)
-  --in-shadow-3: inset -5px 5px 6px rgba(0,0,0,0.1)
-  --in-shadow-4: inset 0px -10px 4px rgba(255,255,255, 0.7)
+  --out-shadow-color-1: rgba(0,0,0,.4)
+  --out-shadow-color-2: rgba(0,0,0, .15)
+  --out-shadow-color-3: rgba(0,0,0,.05)
+  --out-shadow-color-4: rgba(0,0,0,.1)
+  --out-shadow-color-5: rgba(0,0,0,.1)
+  --out-shadow-color-6: rgba(0,0,0,.05)
+  --out-shadow-color-7: rgba(0,0,0, .06)
+  --out-shadow-color-8: rgba(255,255,255, 0.75)
+  --in-shadow-color-1: rgba(0,0,0,.25)
+  --in-shadow-color-2: rgba(0,0,0,0.1)
+  --in-shadow-color-3: rgba(0,0,0,0.1)
+  --in-shadow-color-4: rgba(255,255,255, 0.7)
+  --out-shadow-1: 20px 30px 40px var(--out-shadow-color-1)
+  --out-shadow-2:  0px 30px 5px var(--out-shadow-color-2)
+  --out-shadow-3:  0px 60px 6px var(--out-shadow-color-3)
+  --out-shadow-4: 0px 10px 4px var(--out-shadow-color-4)
+  --out-shadow-5: 10px 5px 10px var(--out-shadow-color-5)
+  --out-shadow-6: -10px 5px 10px var(--out-shadow-color-6)
+  --out-shadow-7: -20px 30px 5px var(--out-shadow-color-7)
+  --out-shadow-8: 0px -12px 12px var(--out-shadow-color-8)
+  --in-shadow-1: inset 0px 10px 5px var(--in-shadow-color-1)
+  --in-shadow-2:  inset 5px 5px 6px var(--in-shadow-color-2)
+  --in-shadow-3: inset -5px 5px 6px var(--in-shadow-color-3)
+  --in-shadow-4: inset 0px -10px 4px var(--in-shadow-color-4)
 
   width: var(--w)
   height: var(--h)
@@ -190,7 +203,7 @@ function getAngle(index: number) {
       position: absolute
       width:100%
       height: calc(50% + var(--pointer-width) / 2)
-      background: #000
+      background: var(--pointer-color)
       border-bottom-left-radius: var(--w)
       border-bottom-right-radius: var(--w)
       box-shadow: 1px 4px 5px rgba(0,0,0,.2)
@@ -198,4 +211,17 @@ function getAngle(index: number) {
 html.dark .clock
   --light: #333
   --bg: #222
+  --pointer-color: #fff
+  --out-shadow-color-1: rgba(0,0,0, 0.7)
+  --out-shadow-color-2: rgba(0,0,0, .5)
+  --out-shadow-color-3: rgba(0,0,0,.15)
+  --out-shadow-color-4: rgba(0,0,0,.05)
+  --out-shadow-color-5: rgba(0,0,0,0.05)
+  --out-shadow-color-6: rgba(0,0,0,.05)
+  --out-shadow-color-7: rgba(0,0,0, .15)
+  --out-shadow-color-8: rgba(0,0,0, 0.2)
+  --in-shadow-color-1: rgba(0,0,0,.25)
+  --in-shadow-color-2: rgba(0,0,0,0.1)
+  --in-shadow-color-3: rgba(0,0,0,0.1)
+  --in-shadow-color-4: rgba(255,255,255, 0.05)
 </style>

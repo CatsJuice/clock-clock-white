@@ -14,8 +14,7 @@ html {
 }
 
 html.dark {
-  background: #121212;
-  color-scheme: dark;
+  background: linear-gradient(to top, #111 0%, #222 100%)
 }
 
 #nprogress {
