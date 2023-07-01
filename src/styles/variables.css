@@ -1,0 +1,7 @@
+:root {
+  --primary: #222;
+}
+
+.dark :root {
+  --primary: #eee;
+}
