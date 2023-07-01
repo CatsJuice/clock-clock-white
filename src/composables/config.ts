@@ -4,6 +4,7 @@ import { CONFIG_STORAGE_KEY } from '~/constants/basic.constant'
 const fps = useFps()
 const { toggle } = useFullscreen()
 const defaultConfig = {
+  size: 100,
   enableShadowAnimation: true,
   fpsLimit: 60,
   hourTickLength: 13,
@@ -13,6 +14,7 @@ const defaultConfig = {
   pointerWidth: 10,
   pointerAnimeDuration: 500,
   pointerAnimeEasing: 'ease' as 'ease' | 'linear',
+  format: '24H' as '24H' | '12H',
 }
 export const config = useStorage(CONFIG_STORAGE_KEY, {
   ...defaultConfig,
@@ -35,6 +37,18 @@ pane.addMonitor(fps, 'value', {
 pane.addInput(isDark, 'value', {
   label: 'Dark',
 })
+
+pane.addInput(config.value, 'size', {
+  label: 'Size',
+  min: 50,
+  max: 200,
+  step: 10,
+}).on('change', createOnChange('size'))
+
+pane.addInput(config.value, 'format', {
+  label: 'Format',
+  options: { '24H': '24H', '12H': '12H' },
+}).on('change', createOnChange('format'))
 
 const shadowFolder = pane.addFolder({ title: 'Clock Shadow', expanded: false })
 

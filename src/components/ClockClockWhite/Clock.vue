@@ -202,7 +202,7 @@ function getAngle(index: number) {
       content: ""
       position: absolute
       width:100%
-      height: calc(50% + var(--pointer-width) / 2)
+      height: calc(50% + var(--pointer-width) / 5 * 2)
       background: var(--pointer-color)
       border-bottom-left-radius: var(--w)
       border-bottom-right-radius: var(--w)
