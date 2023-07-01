@@ -1,10 +1,12 @@
 <script setup lang="ts">
-defineOptions({
-  name: 'IndexPage',
-})
-const { t } = useI18n()
+const now = useNow()
+const value = computed(() => [
+  fillZero(now.value.getHours()),
+  fillZero(now.value.getMinutes()),
+  fillZero(now.value.getSeconds()),
+])
 </script>
 
 <template>
-  <div>{{ t('button.about') }}</div>
+  <ClockClockWhite :value="value" />
 </template>

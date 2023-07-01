@@ -12,6 +12,7 @@ import {
 export default defineConfig({
   shortcuts: [
     ['flex-center', 'flex items-center justify-center'],
+    ['full', 'w-full h-full'],
   ],
   presets: [
     presetUno(),

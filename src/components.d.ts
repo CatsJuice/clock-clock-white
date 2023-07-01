@@ -9,6 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    Clock: typeof import('./components/ClockClockWhite/Clock.vue')['default']
+    ClockClockWhite: typeof import('./components/ClockClockWhite/index.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
