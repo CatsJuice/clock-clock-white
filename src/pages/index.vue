@@ -12,4 +12,7 @@ const value = computed(() => [
 
 <template>
   <ClockClockWhite :value="value" :size="config.size" />
+  <ClientOnly>
+    <Config />
+  </ClientOnly>
 </template>
