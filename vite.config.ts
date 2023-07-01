@@ -19,6 +19,9 @@ import VueMacros from 'unplugin-vue-macros/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
 
 export default defineConfig({
+  server: {
+    host: '0.0.0.0',
+  },
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
@@ -55,6 +58,7 @@ export default defineConfig({
       dirs: [
         'src/composables',
         'src/stores',
+        'src/utils',
       ],
       vueTemplate: true,
     }),
