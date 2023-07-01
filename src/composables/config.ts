@@ -3,13 +3,22 @@ import { CONFIG_STORAGE_KEY } from '~/constants/basic.constant'
 
 const fps = useFps()
 const { toggle } = useFullscreen()
-export const config = useStorage(CONFIG_STORAGE_KEY, {
+const defaultConfig = {
+  enableShadowAnimation: true,
   fpsLimit: 60,
+}
+export const config = useStorage(CONFIG_STORAGE_KEY, {
+  ...defaultConfig,
 })
 export const pane = new Pane({
   expanded: true,
   title: 'Configuration',
 })
+
+for (const key in defaultConfig) {
+  if ((config.value as any)[key] === undefined)
+    (config.value as any)[key] = (defaultConfig as any)[key]
+}
 
 pane.addMonitor(fps, 'value', {
   view: 'graph',
@@ -17,7 +26,13 @@ pane.addMonitor(fps, 'value', {
 })
 
 pane.addInput(isDark, 'value', {
-  label: 'Dark Mode',
+  label: 'Dark',
+})
+
+pane.addInput(config.value, 'enableShadowAnimation', {
+  label: 'Shadow Anime',
+}).on('change', (e) => {
+  config.value.enableShadowAnimation = e.value
 })
 
 pane.addInput(config.value, 'fpsLimit', {

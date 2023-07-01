@@ -26,3 +26,9 @@ useHead({
 <template>
   <RouterView />
 </template>
+
+<style lang="css">
+.tp-dfwv {
+  width: 300px
+}
+</style>

@@ -10,10 +10,13 @@ const $el = ref<HTMLElement | null>(null)
 const { x, y } = useMouse()
 const rect = useElementBounding($el)
 let prevTime = 0
-const paused = false
+let paused = false
 const info = ref(getInfo())
 
-onMounted(startAnime)
+onMounted(() => {
+  if (config.value.enableShadowAnimation)
+    startAnime()
+})
 
 const variableStyles = computed(() => {
   const outDis = clamp(info.value.distance / 10, 10, props.size / 3)
@@ -44,14 +47,21 @@ const shadowStyle = computed(() => ({
   transform: `rotate(${info.value.angle}deg)`,
 }))
 
+watch(() => config.value.enableShadowAnimation, (v) => {
+  if (!v)
+    return stopAnime()
+  startAnime()
+})
+
 function startAnime() {
+  paused = false
   prevTime = Date.now()
   requestAnimationFrame(tick)
 }
-// function _stopAnime() {
-//   prevTime = 0
-//   paused = true
-// }
+function stopAnime() {
+  prevTime = 0
+  paused = true
+}
 
 function tick() {
   if (paused)
