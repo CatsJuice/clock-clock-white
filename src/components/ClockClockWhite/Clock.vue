@@ -22,6 +22,8 @@ const variableStyles = computed(() => {
   const outDis = clamp(info.value.distance / 10, 10, props.size / 3)
   const innDis = clamp((info.value.distance / props.size * 2), 0, 10)
   return {
+    '--pointer-width': `${config.value.pointerWidth}px`,
+    '--pointer-speed': `${config.value.pointerAnimeDuration}ms`,
     '--w': `${props.size}px`,
     '--h': `${props.size}px`,
     '--out-shadow-1': `20px ${outDis}px ${
@@ -99,13 +101,14 @@ function getInfo() {
       :style="shadowStyle"
     />
     <div class="clock__border" absolute inset-0 rounded-full />
-    <div class="clock__inner" relative full rounded-full>
+    <div class="clock__inner" relative full overflow-hidden rounded-full>
+      <Ticks class="mask-layer" :size="size" />
       <div
         class="clock__inner-shadow" full rounded-full
         :style="shadowStyle"
       />
-      <div class="clock__tick-1" />
-      <div class="clock__tick-2" />
+      <div absolute class="clock__tick clock__tick-1" />
+      <div absolute class="clock__tick clock__tick-2" />
     </div>
   </div>
 </template>
@@ -118,6 +121,8 @@ function getInfo() {
   --bw: calc(var(--w) / 20)
   --light: #fff
   --bg: #fafafa
+  --pointer-width: 10px
+  --pointer-speed: 400ms
   --out-shadow-1: 20px 30px 40px rgba(0,0,0,.4)
   --out-shadow-2:  0px 30px 5px rgba(0,0,0,.15)
   --out-shadow-3:  0px 60px 6px rgba(0,0,0,.05)
@@ -125,6 +130,7 @@ function getInfo() {
   --out-shadow-5: 10px 5px 10px rgba(0,0,0,.1)
   --out-shadow-6: -10px 5px 10px rgba(0,0,0,.05)
   --out-shadow-7: -20px 30px 5px rgba(0,0,0, .06)
+  --out-shadow-8: 0px -12px 12px rgba(255,255,255, 0.75)
   --in-shadow-1: inset 0px 10px 5px rgba(0,0,0,.25)
   --in-shadow-2:  inset 5px 5px 6px rgba(0,0,0,0.1)
   --in-shadow-3: inset -5px 5px 6px rgba(0,0,0,0.1)
@@ -135,7 +141,7 @@ function getInfo() {
   padding: var(--bw)
 
   &__shadow
-    box-shadow: var(--out-shadow-1), var(--out-shadow-2), var(--out-shadow-3), var(--out-shadow-4), var(--out-shadow-5), var(--out-shadow-6), var(--out-shadow-7)
+    box-shadow: var(--out-shadow-1), var(--out-shadow-2), var(--out-shadow-3), var(--out-shadow-4), var(--out-shadow-5), var(--out-shadow-6), var(--out-shadow-7), var(--out-shadow-8)
 
   &__border
     background-color: var(--light)
@@ -145,6 +151,29 @@ function getInfo() {
 
     &-shadow
       box-shadow: var(--in-shadow-1), var(--in-shadow-2), var(--in-shadow-3), var(--in-shadow-4)
+
+    .mask-layer
+      position: absolute
+      left: calc(-1 * var(--bw))
+      top: calc(-1 * var(--bw))
+      bottom: calc(-1 * var(--bw))
+      right: calc(-1 * var(--bw))
+
+  &__tick
+    width: var(--pointer-width)
+    height: 100%
+    left: 50%
+    top: 0
+    transform: translateX(-50%)
+    &::after
+      content: ""
+      position: absolute
+      width:100%
+      height: 50%
+      background: #000
+      border-bottom-left-radius: var(--w)
+      border-bottom-right-radius: var(--w)
+      box-shadow: 1px 4px 5px rgba(0,0,0,.2)
 
 html.dark .clock
   --light: #333

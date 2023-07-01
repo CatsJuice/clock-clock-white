@@ -29,6 +29,6 @@ useHead({
 
 <style lang="css">
 .tp-dfwv {
-  width: 300px
+  width: 330px
 }
 </style>

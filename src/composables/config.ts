@@ -6,6 +6,12 @@ const { toggle } = useFullscreen()
 const defaultConfig = {
   enableShadowAnimation: true,
   fpsLimit: 60,
+  hourTickLength: 13,
+  minuteTickLength: 10,
+  hourTickWidth: 1,
+  minuteTickWidth: 1,
+  pointerWidth: 10,
+  pointerAnimeDuration: 500,
 }
 export const config = useStorage(CONFIG_STORAGE_KEY, {
   ...defaultConfig,
@@ -29,18 +35,64 @@ pane.addInput(isDark, 'value', {
   label: 'Dark',
 })
 
-pane.addInput(config.value, 'enableShadowAnimation', {
-  label: 'Shadow Anime',
-}).on('change', (e) => {
-  config.value.enableShadowAnimation = e.value
-})
+const shadowFolder = pane.addFolder({ title: 'Clock Shadow', expanded: false })
 
-pane.addInput(config.value, 'fpsLimit', {
-  label: 'Shadow FPS Limit',
+shadowFolder.addInput(config.value, 'enableShadowAnimation', {
+  label: 'Animation',
+}).on('change', createOnChange('enableShadowAnimation'))
+shadowFolder.addInput(config.value, 'fpsLimit', {
+  label: 'FPS Limit',
   min: 1,
   max: 144,
   step: 1,
-}).on('change', e => config.value.fpsLimit = e.value)
+}).on('change', createOnChange('fpsLimit'))
+
+const tickFolder = pane.addFolder({ title: 'Tick', expanded: false })
+tickFolder.addInput(config.value, 'hourTickLength', {
+  label: 'Hour Tick Length',
+  min: 0,
+  max: 20,
+  step: 1,
+}).on('change', createOnChange('hourTickLength'))
+tickFolder.addInput(config.value, 'minuteTickLength', {
+  label: 'Minute Tick Length',
+  min: 0,
+  max: 20,
+  step: 1,
+}).on('change', createOnChange('minuteTickLength'))
+tickFolder.addInput(config.value, 'hourTickWidth', {
+  label: 'Hour Tick Width',
+  min: 0,
+  max: 5,
+  step: 0.5,
+}).on('change', createOnChange('hourTickWidth'))
+tickFolder.addInput(config.value, 'minuteTickWidth', {
+  label: 'Minute Tick Width',
+  min: 0,
+  max: 5,
+  step: 0.5,
+}).on('change', createOnChange('minuteTickWidth'))
+
+// pointer
+const pointerFolder = pane.addFolder({ title: 'Pointer', expanded: false })
+pointerFolder.addInput(config.value, 'pointerWidth', {
+  label: 'Width',
+  min: 0,
+  max: 20,
+  step: 1,
+}).on('change', createOnChange('pointerWidth'))
+pointerFolder.addInput(config.value, 'pointerAnimeDuration', {
+  label: 'Animation Speed',
+  min: 0,
+  max: 1000,
+  step: 10,
+}).on('change', createOnChange('pointerAnimeDuration'))
 
 pane.addButton({ title: 'Toggle Fullscreen' }).on('click', () => toggle())
 pane.addButton({ title: 'Hide Pane' }).on('click', () => pane.hidden = true)
+
+function createOnChange(key: keyof typeof config.value) {
+  return (e: any) => {
+    (config.value as any)[key] = e.value
+  }
+}
