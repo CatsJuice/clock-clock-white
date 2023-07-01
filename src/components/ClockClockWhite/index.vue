@@ -22,6 +22,8 @@ withDefaults(defineProps<{
             v-for="cn in 2" :key="cn"
             :size="size"
             :value="(parseInt(num) % 10) || 0"
+            :rn="rn"
+            :cn="cn"
           />
         </div>
       </div>

@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { clamp } from '@catsjuice/utils'
+import { angleMap } from './coord-angle'
 
-const props = withDefaults(defineProps<{ value: number; size: number }>(), {
+const props = withDefaults(defineProps<{
+  value: number
+  size: number
+  rn: number
+  cn: number
+}>(), {
   value: 0,
   size: 100,
 })
@@ -92,10 +98,17 @@ function getInfo() {
     angle: Math.atan2(offsetY, offsetX) * (180 / Math.PI) + 90,
   }
 }
+
+function getAngle(index: number) {
+  return `${(angleMap as any)[props.rn]?.[props.cn]?.[props.value]?.[index] || 0}deg`
+}
 </script>
 
 <template>
-  <div ref="$el" class="clock" :style="variableStyles" relative rounded-full>
+  <div
+    ref="$el"
+    class="clock" :style="variableStyles" relative rounded-full
+  >
     <div
       class="clock__shadow" absolute inset-0 rounded-full z="-1"
       :style="shadowStyle"
@@ -107,8 +120,12 @@ function getInfo() {
         class="clock__inner-shadow" full rounded-full
         :style="shadowStyle"
       />
-      <div absolute class="clock__tick clock__tick-1" />
-      <div absolute class="clock__tick clock__tick-2" />
+      <div
+        v-for="n in 2"
+        :key="n"
+        absolute class="clock__pointer"
+        :style="{ '--rotate': getAngle(n - 1), '--easing': config.pointerAnimeEasing }"
+      />
     </div>
   </div>
 </template>
@@ -159,17 +176,20 @@ function getInfo() {
       bottom: calc(-1 * var(--bw))
       right: calc(-1 * var(--bw))
 
-  &__tick
+  &__pointer
+    --rotate: 0
+    --easing: ease
     width: var(--pointer-width)
     height: 100%
     left: 50%
     top: 0
-    transform: translateX(-50%)
+    transform: translateX(-50%) rotate(var(--rotate))
+    transition: transform var(--pointer-speed) var(--easing)
     &::after
       content: ""
       position: absolute
       width:100%
-      height: 50%
+      height: calc(50% + var(--pointer-width) / 2)
       background: #000
       border-bottom-left-radius: var(--w)
       border-bottom-right-radius: var(--w)

@@ -12,6 +12,7 @@ const defaultConfig = {
   minuteTickWidth: 1,
   pointerWidth: 10,
   pointerAnimeDuration: 500,
+  pointerAnimeEasing: 'ease' as 'ease' | 'linear',
 }
 export const config = useStorage(CONFIG_STORAGE_KEY, {
   ...defaultConfig,
@@ -77,7 +78,7 @@ tickFolder.addInput(config.value, 'minuteTickWidth', {
 const pointerFolder = pane.addFolder({ title: 'Pointer', expanded: false })
 pointerFolder.addInput(config.value, 'pointerWidth', {
   label: 'Width',
-  min: 0,
+  min: 1,
   max: 20,
   step: 1,
 }).on('change', createOnChange('pointerWidth'))
@@ -87,6 +88,13 @@ pointerFolder.addInput(config.value, 'pointerAnimeDuration', {
   max: 1000,
   step: 10,
 }).on('change', createOnChange('pointerAnimeDuration'))
+pointerFolder.addInput(config.value, 'pointerAnimeEasing', {
+  label: 'Animation Easing',
+  options: {
+    ease: 'ease',
+    linear: 'linear',
+  },
+}).on('change', createOnChange('pointerAnimeEasing'))
 
 pane.addButton({ title: 'Toggle Fullscreen' }).on('click', () => toggle())
 pane.addButton({ title: 'Hide Pane' }).on('click', () => pane.hidden = true)
