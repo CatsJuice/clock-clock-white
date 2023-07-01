@@ -21,14 +21,21 @@ useHead({
     },
   ],
 })
+
+onMounted(() => {
+  let timer: any
+  document.addEventListener('mousemove', () => {
+    if (timer)
+      clearTimeout(timer)
+    timer = setTimeout(() => {
+      document.body.classList.add('freeze')
+    }, 1000)
+
+    document.body.classList.remove('freeze')
+  })
+})
 </script>
 
 <template>
   <RouterView />
 </template>
-
-<style lang="css">
-.tp-dfwv {
-  width: 330px
-}
-</style>

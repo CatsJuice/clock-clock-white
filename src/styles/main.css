@@ -31,3 +31,14 @@ html.dark {
   width: 100%;
   height: 2px;
 }
+
+.tp-dfwv {
+  width: 330px
+}
+
+body.freeze {
+  cursor: none;
+}
+body.freeze .tp-dfwv {
+  display: none;
+}
