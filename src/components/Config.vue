@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import { Pane } from 'tweakpane'
 
+const props = defineProps<{ timer: any }>()
+
+onMounted(() => {
+  const tw = document.querySelector('.tp-dfwv')
+  if (tw) {
+    tw.addEventListener('mouseenter', () => {
+      clearTimeout(props.timer)
+    })
+  }
+})
+
 const pane = new Pane({
   expanded: true,
   title: 'Configuration',

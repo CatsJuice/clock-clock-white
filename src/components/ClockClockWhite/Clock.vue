@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<{
 })
 
 const $el = ref<HTMLElement | null>(null)
-const { x, y } = useMouse()
+const mousePosition = inject<{ x: number; y: number }>('mousePosition')!
 const rect = useElementBounding($el)
 let prevTime = 0
 let paused = false
@@ -91,8 +91,8 @@ function tick() {
 function getInfo() {
   const centerX = rect.width.value / 2 + rect.left.value
   const centerY = rect.height.value / 2 + rect.top.value
-  const offsetX = x.value - centerX
-  const offsetY = y.value - centerY
+  const offsetX = mousePosition.x - centerX
+  const offsetY = mousePosition.y - centerY
   return {
     distance: Math.sqrt(offsetX ** 2 + offsetY ** 2),
     angle: Math.atan2(offsetY, offsetX) * (180 / Math.PI) + 90,
