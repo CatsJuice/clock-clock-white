@@ -29,7 +29,7 @@ const variableStyles = computed(() => {
   const innDis = clamp((info.value.distance / props.size * 2), 0, 10)
   return {
     '--pointer-width': `${config.value.pointerWidth}px`,
-    '--pointer-speed': `${config.value.pointerAnimeDuration}ms`,
+    '--pointer-speed': `${1000 - config.value.pointerAnimeDuration}ms`,
     '--w': `${props.size}px`,
     '--h': `${props.size}px`,
     '--out-shadow-1': `20px ${outDis}px ${

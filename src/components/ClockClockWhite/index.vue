@@ -11,8 +11,12 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div flex="~" gap-1>
-    <div v-for="(group, gi) in value" :key="gi" flex="~ nowrap" class="number-group">
+  <div flex="~" gap-4>
+    <div
+      v-for="(group, gi) in value"
+      :key="gi" flex="~ nowrap"
+      gap-2 class="number-group"
+    >
       <div
         v-for="(num, ni) in group.split('')"
         :key="ni"

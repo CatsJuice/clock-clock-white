@@ -60,29 +60,30 @@ shadowFolder.addInput(config.value, 'fpsLimit', {
   step: 1,
 }).on('change', createOnChange('fpsLimit'))
 
+// tick
 const tickFolder = pane.addFolder({ title: 'Tick', expanded: false })
 tickFolder.addInput(config.value, 'hourTickLength', {
   label: 'Hour Tick Length',
   min: 0,
-  max: 20,
+  max: 50,
   step: 1,
 }).on('change', createOnChange('hourTickLength'))
 tickFolder.addInput(config.value, 'minuteTickLength', {
   label: 'Minute Tick Length',
   min: 0,
-  max: 20,
+  max: 50,
   step: 1,
 }).on('change', createOnChange('minuteTickLength'))
 tickFolder.addInput(config.value, 'hourTickWidth', {
   label: 'Hour Tick Width',
   min: 0,
-  max: 5,
+  max: 10,
   step: 0.5,
 }).on('change', createOnChange('hourTickWidth'))
 tickFolder.addInput(config.value, 'minuteTickWidth', {
   label: 'Minute Tick Width',
   min: 0,
-  max: 5,
+  max: 10,
   step: 0.5,
 }).on('change', createOnChange('minuteTickWidth'))
 
