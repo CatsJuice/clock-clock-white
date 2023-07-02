@@ -100,7 +100,12 @@ function getInfo() {
 }
 
 function getAngle(index: number) {
-  return `${(angleMap as any)[props.rn]?.[props.cn]?.[props.value]?.[index] || 0}deg`
+  const cursor: any = (angleMap as any)[props.rn]?.[props.cn]?.[props.value]
+  return index === 2
+    ? config.value.thirdPointer
+      ? `${cursor?.[index] ?? cursor?.[1] ?? 0}deg`
+      : `${cursor?.[1] ?? 0}deg`
+    : `${cursor?.[index] || 0}deg`
 }
 </script>
 
@@ -121,7 +126,7 @@ function getAngle(index: number) {
         :style="shadowStyle"
       />
       <div
-        v-for="n in 2"
+        v-for="n in 3"
         :key="n"
         absolute class="clock__pointer"
         :style="{ '--rotate': getAngle(n - 1), '--easing': config.pointerAnimeEasing }"
