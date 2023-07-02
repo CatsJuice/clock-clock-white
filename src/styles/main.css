@@ -17,6 +17,14 @@ html.dark {
   background: linear-gradient(to top, #111 0%, #222 100%)
 }
 
+html.dark.high-contrast-theme {
+  background: linear-gradient(to top, #000 0%, #000 100%)
+}
+
+html.dark.red-theme {
+  background: linear-gradient(to top, #000 0%, #000 100%)
+}
+
 #nprogress {
   pointer-events: none;
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Pane } from 'tweakpane'
+import { themes } from '../constants/theme.constant'
 
 const props = defineProps<{ timer: any }>()
 
@@ -10,6 +11,7 @@ onMounted(() => {
       clearTimeout(props.timer)
     })
   }
+  onThemeChange({ value: config.value.theme })
 })
 
 const pane = new Pane({
@@ -25,9 +27,14 @@ pane.addMonitor(fps, 'value', {
   label: 'FPS',
 })
 
-pane.addInput(isDark, 'value', {
-  label: 'Dark',
-})
+// pane.addInput(isDark, 'value', {
+//   label: 'Dark',
+// })
+pane.addInput(config.value, 'theme', {
+  options: Object.entries(themes).map(([key, value]) => {
+    return { text: value.name, value: key }
+  }),
+}).on('change', onThemeChange)
 
 pane.addInput(config.value, 'size', {
   label: 'Size',
@@ -111,6 +118,18 @@ function createOnChange(key: keyof typeof config.value) {
   return (e: any) => {
     (config.value as any)[key] = e.value
   }
+}
+
+function onThemeChange(e: { value: string }) {
+  const themeName = e.value || 'default'
+  createOnChange('theme')({ value: themeName })
+  const theme = (themes as any)[themeName]!
+  toggleDark(theme.dark)
+  const htmlTag: HTMLElement = document.querySelector('html')!
+  Object.entries(themes).forEach(([_, v]) => {
+    htmlTag.classList.remove(v.class)
+  })
+  htmlTag.classList.add(theme.class)
 }
 </script>
 

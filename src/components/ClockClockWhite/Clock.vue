@@ -146,6 +146,8 @@ function getAngle(index: number) {
   --pointer-color: #000
   --pointer-width: 10px
   --pointer-speed: 400ms
+  --hour-tick-color: #444
+  --minute-tick-color: #333
   --out-shadow-color-1: rgba(0,0,0,.4)
   --out-shadow-color-2: rgba(0,0,0, .15)
   --out-shadow-color-3: rgba(0,0,0,.05)
@@ -214,6 +216,8 @@ function getAngle(index: number) {
       box-shadow: 1px 4px 5px rgba(0,0,0,.2)
 
 html.dark .clock
+  --hour-tick-color: #ccc
+  --minute-tick-color: #ccc
   --light: #333
   --bg: #222
   --pointer-color: #fff
@@ -229,4 +233,22 @@ html.dark .clock
   --in-shadow-color-2: rgba(0,0,0,0.1)
   --in-shadow-color-3: rgba(0,0,0,0.1)
   --in-shadow-color-4: rgba(255,255,255, 0.05)
+
+  &__pointer::after
+    box-shadow: none
+html.dark.high-contrast-theme .clock
+  --light: #111
+  --bg: #0A0A0A
+  --pointer-color: #fff
+  --hour-tick-color: #333
+  --minute-tick-color: #333
+html.dark.transparent-theme .clock
+  --bg: transparent
+  --light: transparent
+  --hour-tick-color: transparent
+  --minute-tick-color: transparent
+  .clock__shadow
+    box-shadow: none
+  .clock__inner-shadow
+    box-shadow: none
 </style>

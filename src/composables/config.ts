@@ -13,6 +13,7 @@ const defaultConfig = {
   pointerAnimeEasing: 'ease' as 'ease' | 'linear',
   format: '24H' as '24H' | '12H',
   thirdPointer: true,
+  theme: 'default',
 }
 export const config = useStorage(CONFIG_STORAGE_KEY, {
   ...defaultConfig,
