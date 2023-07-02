@@ -100,6 +100,9 @@ pointerFolder.addInput(config.value, 'pointerAnimeEasing', {
     linear: 'linear',
   },
 }).on('change', createOnChange('pointerAnimeEasing'))
+pointerFolder.addInput(config.value, 'thirdPointer', {
+  label: 'Third Pointer',
+}).on('change', createOnChange('thirdPointer'))
 
 pane.addButton({ title: 'Toggle Fullscreen' }).on('click', () => toggle())
 pane.addButton({ title: 'Hide Pane' }).on('click', () => pane.hidden = true)
