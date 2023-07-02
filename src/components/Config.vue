@@ -30,18 +30,18 @@ pane.addMonitor(fps, 'value', {
 // pane.addInput(isDark, 'value', {
 //   label: 'Dark',
 // })
-pane.addInput(config.value, 'theme', {
-  options: Object.entries(themes).map(([key, value]) => {
-    return { text: value.name, value: key }
-  }),
-}).on('change', onThemeChange)
-
 pane.addInput(config.value, 'size', {
   label: 'Size',
   min: 50,
   max: 200,
   step: 10,
 }).on('change', createOnChange('size'))
+
+pane.addInput(config.value, 'theme', {
+  options: Object.entries(themes).map(([key, value]) => {
+    return { text: value.name, value: key }
+  }),
+}).on('change', onThemeChange)
 
 pane.addInput(config.value, 'format', {
   label: 'Format',
@@ -110,6 +110,9 @@ pointerFolder.addInput(config.value, 'pointerAnimeEasing', {
 pointerFolder.addInput(config.value, 'thirdPointer', {
   label: 'Third Pointer',
 }).on('change', createOnChange('thirdPointer'))
+pointerFolder.addInput(config.value, 'hideUnnecessaryPointer', {
+  label: 'Hide Unnecessary Pointer',
+}).on('change', createOnChange('hideUnnecessaryPointer'))
 
 pane.addButton({ title: 'Toggle Fullscreen' }).on('click', () => toggle())
 pane.addButton({ title: 'Hide Pane' }).on('click', () => pane.hidden = true)

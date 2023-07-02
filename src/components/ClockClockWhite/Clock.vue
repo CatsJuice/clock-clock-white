@@ -103,9 +103,9 @@ function getAngle(index: number) {
   const cursor: any = (angleMap as any)[props.rn]?.[props.cn]?.[props.value]
   return index === 2
     ? config.value.thirdPointer
-      ? `${cursor?.[index] ?? cursor?.[1] ?? 0}deg`
-      : `${cursor?.[1] ?? 0}deg`
-    : `${cursor?.[index] || 0}deg`
+      ? cursor?.[index] ?? cursor?.[1] ?? 0
+      : cursor?.[1] ?? 0
+    : (cursor?.[index] || 0)
 }
 </script>
 
@@ -125,11 +125,11 @@ function getAngle(index: number) {
         class="clock__inner-shadow" full rounded-full
         :style="shadowStyle"
       />
-      <div
+      <Pointer
         v-for="n in 3"
         :key="n"
+        :angle="getAngle(n - 1)"
         absolute class="clock__pointer"
-        :style="{ '--rotate': getAngle(n - 1), '--easing': config.pointerAnimeEasing }"
       />
     </div>
   </div>
@@ -204,7 +204,7 @@ function getAngle(index: number) {
     left: 50%
     top: 0
     transform: translateX(-50%) rotate(var(--rotate))
-    transition: transform var(--pointer-speed) var(--easing)
+    transition: transform var(--pointer-speed) var(--easing), opacity 0.1s ease
     &::after
       content: ""
       position: absolute
@@ -242,7 +242,7 @@ html.dark.high-contrast-theme .clock
   --pointer-color: #fff
   --hour-tick-color: #333
   --minute-tick-color: #333
-html.dark.transparent-theme .clock
+html.transparent-theme .clock
   --bg: transparent
   --light: transparent
   --hour-tick-color: transparent

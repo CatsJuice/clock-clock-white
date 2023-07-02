@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     Clock: typeof import('./components/ClockClockWhite/Clock.vue')['default']
     ClockClockWhite: typeof import('./components/ClockClockWhite/index.vue')['default']
     Config: typeof import('./components/Config.vue')['default']
+    Pointer: typeof import('./components/ClockClockWhite/Pointer.vue')['default']
     README: typeof import('./components/README.md')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

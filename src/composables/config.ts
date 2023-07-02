@@ -14,6 +14,7 @@ const defaultConfig = {
   format: '24H' as '24H' | '12H',
   thirdPointer: true,
   theme: 'default',
+  hideUnnecessaryPointer: false,
 }
 export const config = useStorage(CONFIG_STORAGE_KEY, {
   ...defaultConfig,
