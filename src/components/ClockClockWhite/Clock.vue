@@ -178,6 +178,7 @@ function getAngle(index: number) {
   padding: var(--bw)
 
   &__shadow
+    will-change: box-shadow, transform, opacity
     box-shadow: var(--out-shadow-1), var(--out-shadow-2), var(--out-shadow-3), var(--out-shadow-4), var(--out-shadow-5), var(--out-shadow-6), var(--out-shadow-7), var(--out-shadow-8)
 
   &__border
@@ -187,6 +188,7 @@ function getAngle(index: number) {
     background-color: var(--bg)
 
     &-shadow
+      will-change: box-shadow, transform, opacity
       box-shadow: var(--in-shadow-1), var(--in-shadow-2), var(--in-shadow-3), var(--in-shadow-4)
 
     .mask-layer
